@@ -7,6 +7,7 @@ A secure, Express.js-based authentication system built for learning and portfoli
 [![Render](https://img.shields.io/badge/Deployed%20on-Render-44cc11?logo=render)](https://render.com)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js)](https://nodejs.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![GitHub release](https://img.shields.io/github/v/release/HongLYe/update-web?label=version&color=blue&sort=semver)
 
 ---
 
