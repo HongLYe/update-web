@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code // Ollama Local Integration</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div class="loader" id="loader">
+        <div class="loader-text">INITIALIZING CLAUDE CODE MODULE</div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
+    </div>
+
+    <!-- MATRIX RAIN -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <a class="logo" href="index.html">
+                <span class="bracket">[</span>AiCrime<span class="bracket">]</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#setup">Setup</a></li>
+                <li><a href="index.html#developer">Developer</a></li>
+                <li><a href="claude-code.html" class="active">Claude Code</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="btn btn-login" id="loginBtn">Login</button>
+            <button class="btn btn-register" id="registerBtn">Register</button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-badge"><span class="dot"></span><span>Agentic Coding // Local LLM Bridge</span></div>
+            <h1 class="hero-title"><span class="glitch" data-text="Claude Code">Claude Code</span></h1>
+            <p class="hero-subtitle">
+                Connect <span class="highlight">Anthropic's Claude Code CLI</span> to 
+                <span class="highlight">Ollama</span> for private, offline AI coding.
+                <br>Zero API costs. Zero data exfiltration. Full agentic power.
+            </p>
+            <div class="typing-text" id="typingText"></div>
+            <div class="hero-buttons">
+                <a href="#quickstart" class="btn btn-hero primary">Quick Start →</a>
+                <a href="#troubleshooting" class="btn btn-hero secondary">Troubleshooting</a>
+            </div>
+            <div class="scroll-indicator"><span>Scroll Down</span><div class="arrow"></div></div>
+        </section>
+
+        <!-- QUICK START SECTION -->
+        <section id="quickstart">
+            <div class="section-header">
+                <div class="section-label">Phase 01</div>
+                <h2 class="section-title"><span class="accent">Quick Start</span> Protocol</h2>
+                <div class="divider"></div>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; max-width: 700px;">
+                    Follow these steps to connect Claude Code to your local Ollama instance.
+                    Total setup time: ~15 minutes. Requires Node.js 18+ and 8GB+ RAM.
+                </p>
+            </div>
+
+            <div class="alert-banner">
+                <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <p><strong>PREREQUISITES:</strong> Ollama installed & running, Node.js 18+, and a model pulled (e.g., <code style="color:var(--cyan)">qwen2.5-coder:14b</code>).</p>
+            </div>
+
+            <!-- OS TABS -->
+            <div class="os-tabs">
+                <button class="os-tab active" data-tab="linux">Linux/macOS</button>
+                <button class="os-tab" data-tab="windows">Windows</button>
+            </div>
+
+            <!-- LINUX/MACOS CONTENT -->
+            <div class="os-content active" id="linux">
+                <div class="step">
+                    <div class="step-number">STEP 01</div>
+                    <h3 class="step-title">Verify Ollama is Running</h3>
+                    <p class="step-desc">Ensure Ollama service is active and your model is loaded.</p>
+                    <div class="code-block">
+                        <div class="code-block-header"><span class="code-lang">bash</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                        <pre class="code-content"><span class="prompt">$ </span><span class="cmd">ollama</span> serve
+<span class="prompt">$ </span><span class="cmd">ollama</span> list
+<span class="output">NAME                    ID              SIZE
+qwen2.5-coder:14b       a1b2c3d4        9.2 GB</span></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">STEP 02</div>
+                    <h3 class="step-title">Install LiteLLM Proxy</h3>
+                    <p class="step-desc">LiteLLM translates Claude Code's requests to Ollama's API.</p>
+                    <div class="code-block">
+                        <div class="code-block-header"><span class="code-lang">bash</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                        <pre class="code-content"><span class="prompt">$ </span><span class="cmd">pip</span> install <span class="string">"litellm[proxy]"</span></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">STEP 03</div>
+                    <h3 class="step-title">Configure LiteLLM</h3>
+                    <p class="step-desc">Create a config file mapping Claude names to local models.</p>
+                    <div class="code-block">
+                        <div class="code-block-header"><span class="code-lang">yaml</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                        <pre class="code-content"><span class="comment"># ~/litellm_config.yaml</span>
+model_list:
+  - model_name: claude-3-5-sonnet-20241022
+    litellm_params:
+      model: ollama/qwen2.5-coder:14b
+      api_base: http://localhost:11434
+general_settings:
+  master_key: sk-local-dev-key</pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">STEP 04</div>
+                    <h3 class="step-title">Start Proxy & Configure Env</h3>
+                    <p class="step-desc">Launch LiteLLM and point Claude Code to it.</p>
+                    <div class="code-block">
+                        <div class="code-block-header"><span class="code-lang">bash</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                        <pre class="code-content"><span class="prompt">$ </span><span class="cmd">litellm</span> --config ~/litellm_config.yaml --port 8000
+<span class="prompt">$ </span><span class="cmd">export</span> <span class="string">ANTHROPIC_BASE_URL=http://localhost:8000</span>
+<span class="prompt">$ </span><span class="cmd">export</span> <span class="string">ANTHROPIC_API_KEY=sk-local-dev-key</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WINDOWS CONTENT -->
+            <div class="os-content" id="windows">
+                <div class="step">
+                    <div class="step-number">STEP 01</div>
+                    <h3 class="step-title">Verify Ollama & Install Proxy</h3>
+                    <p class="step-desc">Run these in PowerShell.</p>
+                    <div class="code-block">
+                        <div class="code-block-header"><span class="code-lang">powershell</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                        <pre class="code-content"><span class="prompt">PS&gt; </span><span class="cmd">ollama</span> serve
+<span class="prompt">PS&gt; </span><span class="cmd">pip</span> install <span class="string">"litellm[proxy]"</span></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">STEP 02</div>
+                    <h3 class="step-title">Set Environment Variables</h3>
+                    <p class="step-desc">Make variables persistent for Claude Code.</p>
+                    <div class="code-block">
+                        <div class="code-block-header"><span class="code-lang">powershell</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                        <pre class="code-content"><span class="prompt">PS&gt; </span>[System.Environment]::SetEnvironmentVariable(<span class="string">'ANTHROPIC_BASE_URL'</span>, <span class="string">'http://localhost:8000'</span>, <span class="string">'User'</span>)
+<span class="prompt">PS&gt; </span>[System.Environment]::SetEnvironmentVariable(<span class="string">'ANTHROPIC_API_KEY'</span>, <span class="string">'sk-local-dev-key'</span>, <span class="string">'User'</span>)</pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">STEP 03</div>
+                    <h3 class="step-title">Start Proxy & Test</h3>
+                    <p class="step-desc">Launch LiteLLM, then run Claude Code in your project folder.</p>
+                    <div class="code-block">
+                        <div class="code-block-header"><span class="code-lang">powershell</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                        <pre class="code-content"><span class="prompt">PS&gt; </span><span class="cmd">litellm</span> --config C:\Users\You\litellm_config.yaml --port 8000
+<span class="prompt">PS&gt; </span><span class="cmd">cd</span> C:\path\to\project
+<span class="prompt">PS&gt; </span><span class="cmd">claude</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECOMMENDED MODELS -->
+            <div style="margin-top: 3rem;">
+                <h3 style="color: #fff; font-size: 1rem; letter-spacing: 1px; margin-bottom: 1rem;"><span style="color: var(--green);">&gt;</span> Recommended Local Models</h3>
+                <table class="models-table">
+                    <thead><tr><th>Model</th><th>Size</th><th>Best For</th><th>Tool Use</th></tr></thead>
+                    <tbody>
+                        <tr><td>qwen2.5-coder:14b</td><td>~9 GB</td><td>Code generation, debugging</td><td style="color: var(--green);">✓ Excellent</td></tr>
+                        <tr><td>llama3.1:8b</td><td>~5 GB</td><td>Fast responses, general tasks</td><td style="color: var(--green);">✓ Good</td></tr>
+                        <tr><td>deepseek-coder-v2:16b</td><td>~10 GB</td><td>Complex code reasoning</td><td style="color: var(--green);">✓ Excellent</td></tr>
+                        <tr><td>phi4:14b</td><td>~9 GB</td><td>Microsoft-optimized tasks</td><td style="color: var(--cyan);">~ Moderate</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TROUBLESHOOTING -->
+        <section id="troubleshooting">
+            <div class="section-header">
+                <div class="section-label">Phase 02</div>
+                <h2 class="section-title"><span class="accent">Troubleshooting</span> Matrix</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="step">
+                <div class="step-number">ISSUE 01</div>
+                <h3 class="step-title">Connection Refused</h3>
+                <p class="step-desc">Verify both services are running and env vars match.</p>
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-lang">bash</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                    <pre class="code-content"><span class="prompt">$ </span><span class="cmd">curl</span> http://localhost:11434/api/tags
+<span class="prompt">$ </span><span class="cmd">curl</span> http://localhost:8000/health
+<span class="prompt">$ </span><span class="cmd">echo</span> <span class="string">$ANTHROPIC_BASE_URL</span></pre>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">ISSUE 02</div>
+                <h3 class="step-title">Tool Use Fails</h3>
+                <p class="step-desc">Use instruct/chat variants, not base models.</p>
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-lang">bash</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+                    <pre class="code-content"><span class="prompt">$ </span><span class="cmd">ollama</span> list
+<span class="comment"># Ensure model name does NOT end with "-base"</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p class="footer-text">
+                <span class="green">[</span> Claude Code + Ollama <span class="green">]</span> // 
+                Local Agentic Coding Setup // 
+                <span class="green">All inference happens on your machine.</span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="../JS/script.js"></script>
+    <script>
+        // SAFETY FALLBACK: Force content visible if IntersectionObserver fails
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

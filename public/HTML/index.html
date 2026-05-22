@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiCrime // Ollama Local Setup</title>
+    <!-- Updated path to CSS in parent folder -->
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div class="loader" id="loader">
+        <div class="loader-text">INITIALIZING AICRIME SYSTEM</div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
+    </div>
+
+    <!-- MATRIX RAIN -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <a class="logo" href="#">
+                <span class="bracket">[</span>AiCrime<span class="bracket">]</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#setup" class="active">Setup</a></li>
+                <li><a href="#developer">Developer</a></li>
+                <li><a href="../HTML/claude-code.html">Claude Code</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="btn btn-login" id="loginBtn">Login</button>
+            <button class="btn btn-register" id="registerBtn">Register</button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="hero-grid"></div>
+
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span>Local AI Infrastructure // Unauthorized Access</span>
+            </div>
+
+            <h1 class="hero-title">
+                <span class="glitch" data-text="AiCrime">AiCrime</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Deploy <span class="highlight">Ollama</span> locally on any system.
+                Run LLMs offline. Zero cloud. Zero tracking.
+                <br>Complete anonymity.
+            </p>
+
+            <div class="typing-text" id="typingText"></div>
+
+            <div class="hero-buttons">
+                <a href="#setup" class="btn btn-hero primary">Begin Setup →</a>
+                <a href="#developer" class="btn btn-hero secondary">API Docs</a>
+            </div>
+
+            <div class="scroll-indicator">
+                <span>Scroll Down</span>
+                <div class="arrow"></div>
+            </div>
+        </section>
+
+        <!-- SETUP SECTION -->
+        <section id="setup">
+            <div class="section-header reveal">
+                <div class="section-label">Phase 01</div>
+                <h2 class="section-title">Local <span class="accent">Setup</span> Protocols</h2>
+                <div class="divider"></div>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; max-width: 700px;">
+                    Choose your operating system below. Each protocol provides step-by-step
+                    instructions to deploy Ollama on your local machine with full offline capability.
+                </p>
+            </div>
+
+            <div class="alert-banner reveal">
+                <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <p><strong>WARNING:</strong> Ensure your system meets minimum requirements — 8GB RAM recommended, GPU with CUDA/Metal support for optimal performance.</p>
+            </div>
+
+            <!-- OS TABS -->
+            <div class="os-tabs reveal">
+                <button class="os-tab active" data-tab="linux">
+                    <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                    Linux
+                </button>
+                <button class="os-tab" data-tab="macos">
+                    <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+                    macOS
+                </button>
+                <button class="os-tab" data-tab="windows">
+                    <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><line x1="12" y1="3" x2="12" y2="21"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+                    Windows
+                </button>
+            </div>
+
+            <!-- LINUX CONTENT -->
+            <div class="os-content active" id="linux">
+                <div class="step reveal">
+                    <div class="step-number">STEP 01</div>
+                    <h3 class="step-title">Download & Install Ollama</h3>
+                    <p class="step-desc">The fastest way to install Ollama on Linux is using the official install script. This script handles all dependencies automatically.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="prompt">$ </span><span class="cmd">curl</span> <span class="flag">-fsSL</span> https://ollama.com/install.sh | sh</pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 02</div>
+                    <h3 class="step-title">Verify Installation</h3>
+                    <p class="step-desc">Confirm Ollama is running by checking the version and service status.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="prompt">$ </span><span class="cmd">ollama</span> --version
+<span class="output">ollama version is 0.4.7</span>
+
+<span class="prompt">$ </span><span class="cmd">systemctl</span> status ollama
+<span class="output">● ollama.service - Ollama Service
+   Loaded: loaded (/etc/systemd/system/ollama.service)
+   Active: active (running)</span></pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 03</div>
+                    <h3 class="step-title">Pull Your First Model</h3>
+                    <p class="step-desc">Download a model to start running inference locally. Llama3.2 is recommended for beginners.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="prompt">$ </span><span class="cmd">ollama</span> pull llama3.2
+<span class="output">pulling manifest
+pulling 4a39a... 100%
+verifying sha256 digest
+writing manifest
+success</span>
+
+<span class="comment"># Run the model interactively</span>
+<span class="prompt">$ </span><span class="cmd">ollama</span> run llama3.2</pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 04</div>
+                    <h3 class="step-title">Configure GPU Acceleration (Optional)</h3>
+                    <p class="step-desc">For NVIDIA GPUs, ensure CUDA drivers are installed. Ollama auto-detects and uses GPU acceleration.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="comment"># Check NVIDIA drivers</span>
+<span class="prompt">$ </span><span class="cmd">nvidia-smi</span>
+
+<span class="comment"># Set custom environment variables if needed</span>
+<span class="prompt">$ </span><span class="cmd">export</span> <span class="string">OLLAMA_HOST=0.0.0.0:11434</span>
+<span class="prompt">$ </span><span class="cmd">export</span> <span class="string">OLLAMA_ORIGINS=*</span>
+
+<span class="comment"># Restart service</span>
+<span class="prompt">$ </span><span class="cmd">systemctl</span> restart ollama</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MACOS CONTENT -->
+            <div class="os-content" id="macos">
+                <div class="step reveal">
+                    <div class="step-number">STEP 01</div>
+                    <h3 class="step-title">Download Ollama for macOS</h3>
+                    <p class="step-desc">Download the official macOS application bundle or use Homebrew for a CLI installation.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="comment"># Option A: Using Homebrew (recommended)</span>
+<span class="prompt">$ </span><span class="cmd">brew</span> install ollama
+
+<span class="comment"># Option B: Direct download</span>
+<span class="prompt">$ </span><span class="cmd">curl</span> <span class="flag">-o</span> ollama-darwin.zip https://ollama.com/download/Ollama-darwin.zip
+<span class="prompt">$ </span><span class="cmd">unzip</span> ollama-darwin.zip
+<span class="prompt">$ </span><span class="cmd">mv</span> Ollama.app /Applications/</pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 02</div>
+                    <h3 class="step-title">Start the Ollama Service</h3>
+                    <p class="step-desc">If installed via Homebrew, start the service. If using the app, simply launch it from Applications.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="comment"># Start Ollama as a background service</span>
+<span class="prompt">$ </span><span class="cmd">brew</span> services start ollama
+
+<span class="comment"># Verify it's running</span>
+<span class="prompt">$ </span><span class="cmd">ollama</span> list
+<span class="output">NAME      ID      SIZE      MODIFIED</span></pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 03</div>
+                    <h3 class="step-title">Pull & Run a Model</h3>
+                    <p class="step-desc">macOS supports Metal GPU acceleration natively. Pull and run any model.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="prompt">$ </span><span class="cmd">ollama</span> pull llama3.2
+
+<span class="comment"># Run interactively</span>
+<span class="prompt">$ </span><span class="cmd">ollama</span> run llama3.2
+<span class="output">>>> Send a message (/? for help)</span>
+
+<span class="comment"># Or use the REST API</span>
+<span class="prompt">$ </span><span class="cmd">curl</span> http://localhost:11434/api/generate <span class="flag">-d</span> '{
+  <span class="string">"model"</span>: <span class="string">"llama3.2"</span>,
+  <span class="string">"prompt"</span>: <span class="string">"Hello from AiCrime"</span>,
+  <span class="string">"stream"</span>: false
+}'</pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 04</div>
+                    <h3 class="step-title">Apple Silicon Optimization</h3>
+                    <p class="step-desc">On M1/M2/M3 Macs, Ollama automatically uses the Neural Engine and GPU. Verify Metal acceleration is active.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">bash</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="comment"># Check GPU utilization during inference</span>
+<span class="prompt">$ </span><span class="cmd">ollama</span> run llama3.2 <span class="flag">--verbose</span>
+
+<span class="comment"># Look for "gpu" in the load info</span>
+<span class="output">load model
+  total duration:       1.2s
+  load duration:        800ms
+  prompt eval count:    1
+  eval duration:        200ms
+  GPU:                  Metal (Apple M2)</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WINDOWS CONTENT -->
+            <div class="os-content" id="windows">
+                <div class="step reveal">
+                    <div class="step-number">STEP 01</div>
+                    <h3 class="step-title">Download Ollama for Windows</h3>
+                    <p class="step-desc">Download the Windows installer from the official site or use winget via PowerShell.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">powershell</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="comment"># Option A: Using winget (recommended)</span>
+<span class="prompt">PS&gt; </span><span class="cmd">winget</span> install --id Ollama.Ollama
+
+<span class="comment"># Option B: Direct installer download</span>
+<span class="comment"># Visit: https://ollama.com/download</span>
+<span class="comment"># Download OllamaSetup.exe and run it</span>
+
+<span class="comment"># Option C: Scoop package manager</span>
+<span class="prompt">PS&gt; </span><span class="cmd">scoop</span> install ollama</pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 02</div>
+                    <h3 class="step-title">Verify Installation</h3>
+                    <p class="step-desc">Open PowerShell or Command Prompt and verify Ollama is accessible.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">powershell</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="prompt">PS&gt; </span><span class="cmd">ollama</span> --version
+<span class="output">ollama version is 0.4.7</span>
+
+<span class="prompt">PS&gt; </span><span class="cmd">ollama</span> serve
+<span class="output">time=2025-01-15T... level=INFO source=routes.go:...
+msg="Listening on 127.0.0.1:11434"</span></pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 03</div>
+                    <h3 class="step-title">Pull & Run Models</h3>
+                    <p class="step-desc">Use the same commands across all platforms. Pull a model and start chatting.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">powershell</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="comment"># Pull a model</span>
+<span class="prompt">PS&gt; </span><span class="cmd">ollama</span> pull llama3.2
+
+<span class="comment"># Run the model</span>
+<span class="prompt">PS&gt; </span><span class="cmd">ollama</span> run llama3.2
+<span class="output">>>> Send a message (/? for help)</span>
+<span class="output">>>> Who are you?</span>
+<span class="output">I am a large language model trained by Meta.</span>
+
+<span class="comment"># List downloaded models</span>
+<span class="prompt">PS&gt; </span><span class="cmd">ollama</span> list
+<span class="output">NAME            ID           SIZE    MODIFIED
+llama3.2        a694fb51a842  2.0GB   2 minutes ago</span></pre>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-number">STEP 04</div>
+                    <h3 class="step-title">GPU Setup (NVIDIA)</h3>
+                    <p class="step-desc">For GPU acceleration on Windows, install the latest NVIDIA drivers. Ollama auto-detects CUDA-capable GPUs.</p>
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-lang">powershell</span>
+                            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre class="code-content"><span class="comment"># Verify CUDA GPU detection</span>
+<span class="prompt">PS&gt; </span><span class="cmd">ollama</span> run llama3.2 <span class="flag">--verbose</span>
+
+<span class="comment"># Check for GPU in output</span>
+<span class="output">GPU:    NVIDIA GeForce RTX 4070
+Layers: 33/33 (100% GPU offload)</span>
+
+<span class="comment"># Set custom port if needed</span>
+<span class="prompt">PS&gt; </span><span class="cmd">setx</span> <span class="string">OLLAMA_HOST</span> <span class="string">"0.0.0.0:11434"</span>
+<span class="comment"># Restart Ollama after setting env vars</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFO CARDS -->
+            <div class="info-grid reveal" style="margin-top: 3rem;">
+                <div class="info-card">
+                    <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <h3>100% Offline</h3>
+                    <p>All inference happens locally. No data leaves your machine. No API keys required. No telemetry.</p>
+                </div>
+                <div class="info-card">
+                    <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    <h3>GPU Accelerated</h3>
+                    <p>NVIDIA CUDA, AMD ROCm, and Apple Metal are all supported. Automatic GPU offloading.</p>
+                </div>
+                <div class="info-card">
+                    <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></svg>
+                    <h3>REST API</h3>
+                    <p>Built-in OpenAI-compatible API endpoint at localhost:11434. Drop-in replacement for cloud APIs.</p>
+                </div>
+                <div class="info-card">
+                    <svg class="cyber-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    <h3>Model Library</h3>
+                    <p>Access hundreds of open-weight models: Llama, Mistral, Phi, Gemma, Qwen, and many more.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEVELOPER SECTION -->
+        <section id="developer">
+            <div class="section-header reveal">
+                <div class="section-label">Phase 02</div>
+                <h2 class="section-title">Developer <span class="accent">Interface</span></h2>
+                <div class="divider"></div>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; max-width: 700px;">
+                    Ollama exposes a REST API at <span style="color: var(--cyan);">localhost:11434</span>.
+                    Integrate with any language or framework. Full OpenAI compatibility mode available.
+                </p>
+            </div>
+
+            <div class="dev-grid reveal">
+                <!-- API ENDPOINTS -->
+                <div class="dev-panel">
+                    <div class="dev-panel-header">
+                        <div class="dev-panel-dot r"></div>
+                        <div class="dev-panel-dot y"></div>
+                        <div class="dev-panel-dot g"></div>
+                        <span class="dev-panel-title">API Endpoints</span>
+                    </div>
+                    <div class="dev-panel-body">
+                        <div class="api-endpoint">
+                            <span class="api-method post">POST</span>
+                            <span class="api-path">/api/generate</span>
+                            <span class="api-desc">Generate completion</span>
+                        </div>
+                        <div class="api-endpoint">
+                            <span class="api-method post">POST</span>
+                            <span class="api-path">/api/chat</span>
+                            <span class="api-desc">Chat completion</span>
+                        </div>
+                        <div class="api-endpoint">
+                            <span class="api-method post">POST</span>
+                            <span class="api-path">/api/embeddings</span>
+                            <span class="api-desc">Get embeddings</span>
+                        </div>
+                        <div class="api-endpoint">
+                            <span class="api-method get">GET</span>
+                            <span class="api-path">/api/tags</span>
+                            <span class="api-desc">List models</span>
+                        </div>
+                        <div class="api-endpoint">
+                            <span class="api-method post">POST</span>
+                            <span class="api-path">/api/pull</span>
+                            <span class="api-desc">Pull model</span>
+                        </div>
+                        <div class="api-endpoint">
+                            <span class="api-method delete">DELETE</span>
+                            <span class="api-path">/api/delete</span>
+                            <span class="api-desc">Delete model</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUICK START CODE -->
+                <div class="dev-panel">
+                    <div class="dev-panel-header">
+                        <div class="dev-panel-dot r"></div>
+                        <div class="dev-panel-dot y"></div>
+                        <div class="dev-panel-dot g"></div>
+                        <span class="dev-panel-title">quick_start.py</span>
+                    </div>
+                    <div class="dev-panel-body">
+                        <div class="code-block" style="margin: 0;">
+                            <div class="code-block-header">
+                                <span class="code-lang">python</span>
+                                <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                            </div>
+                            <pre class="code-content"><span class="cmd">import</span> requests
+
+<span class="comment"># Generate a response</span>
+response = requests.post(
+    <span class="string">"http://localhost:11434/api/generate"</span>,
+    json={
+        <span class="string">"model"</span>: <span class="string">"llama3.2"</span>,
+        <span class="string">"prompt"</span>: <span class="string">"Explain quantum computing"</span>,
+        <span class="string">"stream"</span>: <span class="cmd">False</span>
+    }
+)
+
+print(response.json()[<span class="string">"response"</span>])</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODELS TABLE -->
+            <div class="reveal" style="margin-top: 3rem;">
+                <h3 style="color: #fff; font-size: 1rem; letter-spacing: 1px; margin-bottom: 1rem;">
+                    <span style="color: var(--green);">&gt;</span> Popular Models
+                </h3>
+                <table class="models-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Command</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Llama 3.2</td><td><span class="model-tag llm">LLM</span></td><td>2.0 GB</td><td style="color: var(--green);">ollama pull llama3.2</td></tr>
+                        <tr><td>Mistral</td><td><span class="model-tag llm">LLM</span></td><td>4.1 GB</td><td style="color: var(--green);">ollama pull mistral</td></tr>
+                        <tr><td>Phi-3</td><td><span class="model-tag llm">LLM</span></td><td>2.2 GB</td><td style="color: var(--green);">ollama pull phi3</td></tr>
+                        <tr><td>Qwen 2.5</td><td><span class="model-tag llm">LLM</span></td><td>4.7 GB</td><td style="color: var(--green);">ollama pull qwen2.5</td></tr>
+                        <tr><td>Gemma 2</td><td><span class="model-tag llm">LLM</span></td><td>2.6 GB</td><td style="color: var(--green);">ollama pull gemma2</td></tr>
+                        <tr><td>nomic-embed</td><td><span class="model-tag embed">EMBED</span></td><td>274 MB</td><td style="color: var(--green);">ollama pull nomic-embed-text</td></tr>
+                        <tr><td>LLaVA</td><td><span class="model-tag vision">VISION</span></td><td>4.7 GB</td><td style="color: var(--green);">ollama pull llava</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TERMINAL SIMULATION -->
+            <div class="reveal" style="margin-top: 3rem;">
+                <h3 style="color: #fff; font-size: 1rem; letter-spacing: 1px; margin-bottom: 1rem;">
+                    <span style="color: var(--green);">&gt;</span> Live Terminal Simulation
+                </h3>
+                <div class="terminal-output" id="terminalOutput">
+                    <div class="line dim-line">$ initializing ollama connection...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <pre class="footer-ascii">
+ ███╗   ██╗███████╗ ██████╗ ███╗   ██╗    █████╗ ██╗   ██╗████████╗ ██████╗
+ ████╗  ██║██╔════╝██╔═══██╗████╗  ██║   ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗
+ ██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║   ███████║██║   ██║   ██║   ██║   ██║
+ ██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║   ██╔══██║██║   ██║   ██║   ██║   ██║
+ ██║ ╚████║███████╗╚██████╔╝██║ ╚████║██╗██║  ██║╚██████╔╝   ██║   ╚██████╔╝
+ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝
+            </pre>
+            <p class="footer-text">
+                <span class="green">[</span> AiCrime System <span class="green">]</span> // 
+                Ollama Local Setup Guide // 
+                <span class="green">All inference happens on your machine.</span>
+            </p>
+            <p class="footer-text" style="margin-top: 0.5rem; opacity: 0.5;">
+                This is an educational resource. Use responsibly.
+            </p>
+        </footer>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">[ Authentication ]</span>
+                <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="terminal-input-group">
+                    <label class="terminal-input-label">
+                        <span class="prompt-char">root</span>@aicrime:~$ username
+                    </label>
+                    <input type="text" class="terminal-input" id="loginUser" placeholder="enter_username" autocomplete="off">
+                </div>
+                <div class="terminal-input-group">
+                    <label class="terminal-input-label">
+                        <span class="prompt-char">root</span>@aicrime:~$ password
+                    </label>
+                    <input type="password" class="terminal-input" id="loginPass" placeholder="••••••••••" autocomplete="off">
+                </div>
+                <div class="login-status" id="loginStatus"></div>
+                <button class="modal-submit" onclick="handleLogin()">Authenticate →</button>
+            </div>
+            <div class="modal-footer">
+                <span>No credentials? </span>
+                <a onclick="switchModal('loginModal', 'registerModal')">Create access</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTER MODAL -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">[ New Access Token ]</span>
+                <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="terminal-input-group">
+                    <label class="terminal-input-label">
+                        <span class="prompt-char">root</span>@aicrime:~$ username
+                    </label>
+                    <input type="text" class="terminal-input" id="regUser" placeholder="choose_username" autocomplete="off">
+                </div>
+                <div class="terminal-input-group">
+                    <label class="terminal-input-label">
+                        <span class="prompt-char">root</span>@aicrime:~$ email
+                    </label>
+                    <input type="email" class="terminal-input" id="regEmail" placeholder="user@darknet.local" autocomplete="off">
+                </div>
+                <div class="terminal-input-group">
+                    <label class="terminal-input-label">
+                        <span class="prompt-char">root</span>@aicrime:~$ password
+                    </label>
+                    <input type="password" class="terminal-input" id="regPass" placeholder="••••••••••" autocomplete="off">
+                </div>
+                <div class="terminal-input-group">
+                    <label class="terminal-input-label">
+                        <span class="prompt-char">root</span>@aicrime:~$ confirm
+                    </label>
+                    <input type="password" class="terminal-input" id="regConfirm" placeholder="••••••••••" autocomplete="off">
+                </div>
+                <div class="login-status" id="registerStatus"></div>
+                <button class="modal-submit" onclick="handleRegister()">Generate Token →</button>
+            </div>
+            <div class="modal-footer">
+                <span>Already registered? </span>
+                <a onclick="switchModal('registerModal', 'loginModal')">Authenticate</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXTERNAL JAVASCRIPT -->
+    <script src="../JS/script.js"></script>
+</body>
+</html>

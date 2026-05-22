@@ -1,0 +1,31 @@
+{
+  "name": "aicrime-auth",
+  "version": "1.0.0",
+  "description": "Authentication study project for AiCrime",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "postinstall": "node -e \"try{require('sqlite3')}catch(e){}\" || echo 'sqlite3 optional for local dev only'"
+  },
+  "keywords": [
+    "auth",
+    "express",
+    "study"
+  ],
+  "author": "HongLYe",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.5.2",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.13.1"
+  },
+  "optionalDependencies": {
+    "sqlite3": "^6.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
